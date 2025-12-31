@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Task Title    : Replace a substring
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -29,6 +29,9 @@
  File Inclusions
 ============================================================*/
 #include <iostream>
+#include <climits>
+#include <string>
+
 /*============================================================
  Used Namespaces
 ============================================================*/
@@ -60,31 +63,82 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+/*============================================================
+ File Inclusions
+============================================================*/
+bool starts_with(string input, string pattern, int pos)
 {
-    int count{0};
+    int i{0};
 
-    
-    for(int i = 50; i <= 300; i++)
+    for(i = 0; i < input.length() && input[pos] == pattern[i]; ++i, ++pos)
     {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
+        /* Do Nothing */
+    }
 
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
+    return i == pattern.length() ? true : false;
+}
+string replace_str(string input, string pattern, string to)
+{
+    int pattern_start_indices[100];
+    int pattern_start_indices_counter{0};
+    string new_string{""};
+    int i{0};
+    int j{0};
+
+
+    /* Identify Pattern Locations */
+    for(i = 0; i < input.length(); ++i)
+    {
+        if(starts_with(input,pattern,i))
         {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
+            pattern_start_indices[pattern_start_indices_counter] = i;
+            ++ pattern_start_indices_counter;
         }
     }
 
-    cout << count << endl;
+    /* format the new string */
+    i = 0;
 
+    while(i < input.length() && j < pattern_start_indices_counter)
+    {
+        if(i != pattern_start_indices[j]) /* This is a normal character, copy as it is to the new string */
+        {
+            new_string.push_back(input[i]);
+
+            /* Increment i by one */
+            ++i;
+        }
+        else /* This is the start of the pattern sequence of characters */
+        {
+            /* increment j to point to the new index */
+            ++j;
+
+            /* increment i by the length of the pattern string */
+            i += pattern.length();
+
+            /* Append the to pattern to the new string */
+            new_string += to;
+        }
+    }
+
+
+    return new_string; 
+}
+int main(int argc, char const *argv[])
+{
+    string original; 
+    string pattern;
+    string replacement; 
+
+    cout << "Enter original string: ";
+    getline(cin,original);
+
+    cout << "Enter replaced pattern: ";
+    getline(cin, pattern);
+
+    cout << "Enter pattern to be place: ";
+    getline(cin, replacement);
+
+    cout << replace_str(original,pattern,replacement);
+    return 0;
 }

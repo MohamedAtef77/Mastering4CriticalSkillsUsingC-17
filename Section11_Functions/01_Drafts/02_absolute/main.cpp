@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Draft Title   : Absolute
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -60,31 +60,17 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+int our_abs(int n)
 {
-    int count{0};
+    if (n >= 0)
+        return n;
+    return -n;
+}
 
-    
-    for(int i = 50; i <= 300; i++)
-    {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
+int main()
+{
+    cout << our_abs(5) << endl;
+    cout << our_abs(-5) << endl;
 
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
-    }
-
-    cout << count << endl;
-
+    return 0;
 }

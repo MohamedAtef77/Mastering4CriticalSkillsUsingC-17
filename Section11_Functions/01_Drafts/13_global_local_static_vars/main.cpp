@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Draft Title   : Global, local, and static variables 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -29,6 +29,8 @@
  File Inclusions
 ============================================================*/
 #include <iostream>
+#include <cmath>
+#include <cstdlib>
 /*============================================================
  Used Namespaces
 ============================================================*/
@@ -60,31 +62,27 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+int global_val{10};
+
+void fun()
 {
-    int count{0};
+    int i1{0};        // local variable
+    int i2;           // local: garbage
+    static int si{0}; // static variable
 
-    
-    for(int i = 50; i <= 300; i++)
-    {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
+    ++i1, ++si;
+    global_val += 10;
+    cout << i2 << " " << si << " "
+         << global_val << "\n";
+}
 
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
+int main()
+{
+    fun(), fun(), fun();
+    cout << global_val << "\n";
 
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
-    }
-
-    cout << count << endl;
-
+    // 1 1 20
+    // 1 2 30
+    // 1 3 40
+    // 40
 }

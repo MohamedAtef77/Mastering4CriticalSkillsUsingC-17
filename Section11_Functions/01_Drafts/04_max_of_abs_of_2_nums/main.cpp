@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Draft Title   : Maximum of Absolute Of 2 Numbers 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -60,31 +60,39 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+int our_abs(int n)
 {
-    int count{0};
-
-    
-    for(int i = 50; i <= 300; i++)
+    if(n >= 0)
     {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
-
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
+        return n;
     }
 
-    cout << count << endl;
 
+    return -n;
+}
+int our_max(int a, int b)
+{
+    int max; 
+
+    a = our_abs(a);
+    b = our_abs(b);
+
+
+    if(a > b)
+    {
+        max = a; 
+    }
+    else 
+    {
+        max = b;
+    }
+
+    return max;
+}
+int main()
+{
+    cout << our_max(2,5) << endl;
+    cout << our_max(2,-5) << endl;
+
+    return 0;
 }

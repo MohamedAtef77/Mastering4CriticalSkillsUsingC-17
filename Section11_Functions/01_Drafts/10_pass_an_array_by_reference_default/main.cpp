@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Draft Title   : Pass an array by reference (default)
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -60,31 +60,23 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+int sum_arrary(int arr[], int len)
 {
-    int count{0};
-
-    
-    for(int i = 50; i <= 300; i++)
+    int sum = 0; 
+    for(int i = 0; i < len; ++i)
     {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
-
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
+        sum += arr[i];
     }
 
-    cout << count << endl;
+    return sum; 
+}
+int main(int argc, char const *argv[])
+{
+    /* code */
+    int arr[6]{1,2,3,4,5,6};
+    cout << sum_arrary(arr,3) << endl;
+    cout << sum_arrary(arr,6) << endl;
 
+    
+    return 0;
 }

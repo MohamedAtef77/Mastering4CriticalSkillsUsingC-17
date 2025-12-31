@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Task Title    : Get nth prime 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -29,6 +29,9 @@
  File Inclusions
 ============================================================*/
 #include <iostream>
+#include <climits>
+#include <string>
+
 /*============================================================
  Used Namespaces
 ============================================================*/
@@ -60,31 +63,58 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+/*============================================================
+ File Inclusions
+============================================================*/
+bool isPrime(int n)
 {
-    int count{0};
-
-    
-    for(int i = 50; i <= 300; i++)
+    bool retVal = true; 
+    if(n <= 1)
     {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
-
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
+        retVal = false; 
+    }
+    else
+    {
+        for(int i = 2; i < n; ++i)
         {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
+            if( n % i == 0)
             {
-                count++;
+                retVal = false;
+                break;
             }
         }
     }
 
-    cout << count << endl;
 
+    return retVal; 
+
+}
+int getNthPrime(int no_terms)
+{
+    int i = 0; 
+    int result; 
+
+    while((i < INT_MAX) && no_terms > 0)
+    {
+        
+        if(isPrime(i))
+        {
+            result = i;
+            no_terms--;
+        }
+
+        ++i;
+    }
+
+    return result;
+}
+
+int main(int argc, char const *argv[])
+{
+    /* code */
+
+    cout << getNthPrime(6) << endl;
+    cout << getNthPrime(2) << endl; 
+    
+    return 0;
 }

@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Longest Subarray with Equal 0s and 1s
- Module        : Section 08 – 1D Arrays
+ Task Title    : Calculator 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -30,6 +30,8 @@
 ============================================================*/
 #include <iostream>
 #include <climits>
+#include <string>
+
 /*============================================================
  Used Namespaces
 ============================================================*/
@@ -61,68 +63,104 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-/*
-============================================================
- Task Title    : Longest Subarray with Equal 0s and 1s (Prefix Sum)
- Key Notes:
- - Maps 0 -> -1 and 1 -> +1 to leverage zero-sum windows.
- - Stores first index per prefix sum to maximize window length.
- - Uses an offset array sized for N up to 1000.
-============================================================
-*/
-#include <iostream>
-using namespace std;
-
-int main()
+/*============================================================
+ File Inclusions
+============================================================*/
+void read_operands(double &n1, double &n2)
 {
-    int N;
-    cin >> N;
+    cout << "Enter the first operand: ";
+    cin >> n1;
 
-    int a[1000]; // N < 1000 as per problem
-    for (int i = 0; i < N; ++i)
+    cout << "Enter the second operand: ";
+    cin >> n2; 
+
+
+}
+double add_two_numbers(const double &a, const double &b)
+{
+    return a+b;
+
+}
+double subtract_two_numbers(const double &a, const double &b)
+{
+    return a - b; 
+}
+double multiply_two_numbers(const double &a, const double &b)
+{
+    return a * b;
+}
+double divide_two_numbers(const double &a, const double &b)
+{
+    return a / b;
+}
+char read_operator(void)
+{
+    char op;
+    cout << "Enter operator (+,-,*,/) or q to exit: ";
+    cin >> op; 
+
+    return op; 
+}
+
+int caluculator(void)
+{
+    char op = 's'; /* Available characters s, +,-,*,/, q */
+    double op1, op2, result;
+    static int no_of_usages{0};
+
+    cout << "This is a simple calculator program. " << endl;
+
+    while(true)
     {
-        cin >> a[i];
-    }
-
-    const int OFFSET = N;    // to shift sums [-N..N] into [0..2N]
-    int first[2 * 1000 + 1]; // enough for N up to 1000
-
-    // Initialize all as "never seen"
-    for (int i = 0; i < 2 * N + 1; ++i)
-    {
-        first[i] = -2; // -2 = never seen
-    }
-
-    int sum = 0;
-    int bestLen = 0;
-
-    // sum = 0 is considered seen at index -1 (before array starts)
-    first[0 + OFFSET] = -1;
-
-    for (int i = 0; i < N; ++i)
-    {
-        // treat 0 as -1, 1 as +1
-        if (a[i] == 1)
-            sum += 1;
-        else
-            sum -= 1;
-
-        int idx = sum + OFFSET;
-
-        if (first[idx] == -2)
+        read_operands(op1,op2);
+        op = read_operator();
+        if (op == 'q' || op == 'Q')
         {
-            // first time we see this prefix sum
-            first[idx] = i;
+            break;
         }
-        else
+        
+
+        no_of_usages ++; 
+
+
+        switch(op)
         {
-            // seen before: subarray (first[idx] + 1 .. i) has sum 0
-            int len = i - first[idx];
-            if (len > bestLen)
-                bestLen = len;
+            case '+':
+                result = add_two_numbers(op1,op2);
+                break;
+            case '-':
+                result = subtract_two_numbers(op1,op2);
+                break;
+            case '*':
+                result = multiply_two_numbers(op1,op2);
+                break;
+            case '/':
+                result = divide_two_numbers(op1,op2);
+                break;
+            default:
+                cout << "Unsupported operator. Try again." << endl;
+                op = read_operator();
+                continue;
+        }
+
+        cout << "Result: " << result << endl;
+
+        cout << "Enter 'q' to quit or any other key to continue: ";
+        cin >> op;
+        if (op == 'q' || op == 'Q')
+        {
+            break;
         }
     }
 
-    cout << bestLen << "\n";
+    return no_of_usages;
+}
+int main(int argc, char const *argv[])
+{
+    int count{0};
+    
+    count = caluculator();
+    cout << "This program was used for " << count << " time(s)." << endl;
+
     return 0;
 }

@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Task Title    : reverse a string 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -29,6 +29,8 @@
  File Inclusions
 ============================================================*/
 #include <iostream>
+#include <climits>
+
 /*============================================================
  Used Namespaces
 ============================================================*/
@@ -60,31 +62,31 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+/*============================================================
+ File Inclusions
+============================================================*/
+
+string reverse_string(const string &original_str)
 {
-    int count{0};
+    string new_str;
+    int start = 0; 
+    int end = original_str.length() - 1; 
 
-    
-    for(int i = 50; i <= 300; i++)
+    while(end >= 0)
     {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
+        new_str += original_str[end];
 
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
+        start++;
+        end--;
     }
 
-    cout << count << endl;
 
+    return new_str;
+}
+int main(int argc, char const *argv[])
+{
+    cout << reverse_string("Mohamed") << endl;
+
+
+    return 0;
 }

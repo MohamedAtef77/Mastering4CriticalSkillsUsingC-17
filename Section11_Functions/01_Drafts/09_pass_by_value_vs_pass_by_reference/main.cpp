@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Draft Title   : Pass by value vs pass by reference 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -60,31 +60,32 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
+void change(int a, int &b)
+{
+    a++;
+    b++;
+
+
+}
+
+void read(int x, int &y, string &str)
+{
+    cin >> x >> y >> str;
+
+}
 int main(void)
 {
-    int count{0};
+    int a{1};
+    int b{1};
+    string name{};
 
-    
-    for(int i = 50; i <= 300; i++)
-    {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
+    cout << a << " " << b << endl;
 
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
+    change(a,b);
 
+    cout << a << " " << b << endl;
 
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
-    }
+    read(a,b,name);
 
-    cout << count << endl;
-
+    cout << a << " " << b << " " << name << endl;
 }

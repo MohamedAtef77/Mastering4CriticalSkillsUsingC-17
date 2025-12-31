@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Task Title    : Set Powers 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -29,6 +29,9 @@
  File Inclusions
 ============================================================*/
 #include <iostream>
+#include <climits>
+#include <string>
+
 /*============================================================
  Used Namespaces
 ============================================================*/
@@ -60,31 +63,36 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+/*============================================================
+ File Inclusions
+============================================================*/
+void set_powers(int arr[], int len = 5, int m = 2)
 {
-    int count{0};
+    arr[0] = 1 ; 
+    int mul = m;
 
-    
-    for(int i = 50; i <= 300; i++)
+    for(int i = 1 ; i < len; ++i)
     {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
-
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
+        arr[i] = mul;
+        mul *= m;
+    }
+}
+void print_arr(const int arr[], int len)
+{
+    for(int i = 0; i < len; ++i)
+    {
+        cout << arr[i] << " ";
     }
 
-    cout << count << endl;
+    cout << endl;
+}
 
+int main(int argc, char const *argv[])
+{
+    /* code */
+    int arr[100];
+    set_powers(arr,6,2);
+    print_arr(arr,6);
+
+    return 0;
 }

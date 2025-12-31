@@ -63,11 +63,11 @@ using namespace std;
 ============================================================*/
 /*
 ============================================================
- Task Title    : Count Increasing Sub-arrays (Refactored)
- Key Improvements:
- - Fixes N=1 bug.
- - Removes complex state flags (is_last_op_decline).
- - Uses cumulative counting logic.
+ Task Title    : Josephus Problem (Simulation)
+ Key Notes:
+ - Simulates circular elimination with a running k counter.
+ - Marks eliminated players in-place and keeps a live count.
+ - Prints removal order in the sequence it occurs.
 ============================================================
 */
 #include <iostream>

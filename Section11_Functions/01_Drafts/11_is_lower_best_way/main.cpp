@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Draft Title   : Is lower best way 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -60,31 +60,27 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+bool isLower(const string &str)
 {
-    int count{0};
+    bool ret{true}; 
 
-    
-    for(int i = 50; i <= 300; i++)
-    {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
-
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
+    for(int i = 0; i < str.length(); ++i)
+    {   
+        if(str[i] >= 'A' && str[i] <= 'Z')
         {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
+            ret = false;
+            break;
         }
     }
 
-    cout << count << endl;
+    return ret;
+}
+int main(int argc, char const *argv[])
+{
 
+    string str1{"ahmed"};
+
+    cout << isLower(str1) << endl;
+    cout << isLower("MOHAMED") << endl;
+    return 0;
 }

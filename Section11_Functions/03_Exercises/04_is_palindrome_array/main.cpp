@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Task Title    : Is a palindrome array 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -29,6 +29,9 @@
  File Inclusions
 ============================================================*/
 #include <iostream>
+#include <climits>
+#include <string>
+
 /*============================================================
  Used Namespaces
 ============================================================*/
@@ -60,31 +63,58 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+/*============================================================
+ File Inclusions
+============================================================*/
+
+bool isPalindromeArray(int arr[], int len)
 {
-    int count{0};
+    int start = 0; 
+    int end = len - 1; 
+    bool ret = false;
 
-    
-    for(int i = 50; i <= 300; i++)
+
+    while(start < end && arr[start] == arr[end])
     {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
-
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
+        start++;
+        end--;
     }
 
-    cout << count << endl;
 
+    if(start >= end) /* The loop continued till the end of the arra from both sides */
+    {
+        ret = true;
+    }
+
+    return ret;
+
+}
+int read_arr(int arr[])
+{
+    int length{0};
+    cout << "Enter the length of the array: ";
+    cin >>  length; 
+
+    cout << "Enter the elements of the array (spaced): "; 
+    
+    for(int i = 0; i < length; ++i)
+    {
+        cin >> arr[i];
+    }
+
+    return length > 100 ? -1 : length;  
+}
+int main(int argc, char const *argv[])
+{
+    int arr[100];
+    int length{0};
+
+
+    length = read_arr(arr);
+
+    cout << isPalindromeArray(arr,length);
+
+
+    /* code */
+    return 0;
 }

@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Draft Title   : Is lower best way 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -29,6 +29,8 @@
  File Inclusions
 ============================================================*/
 #include <iostream>
+#include <cmath>
+#include <cstdlib>
 /*============================================================
  Used Namespaces
 ============================================================*/
@@ -60,31 +62,34 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+int main()
 {
-    int count{0};
+    cout << abs(-2) << "\n";     // 2
+    cout << fabs(-2.4) << "\n";  // 2.4
+    cout << ceil(2.4) << "\n";   // 3
+    cout << floor(2.4) << "\n";  // 2
+    cout << round(2.4) << "\n";  // 2
+    cout << round(2.5) << "\n";  // 3
+    cout << round(2.6) << "\n";  // 3
+    cout << round(-2.6) << "\n"; // -3
+    cout << round(-2.4) << "\n"; // -2
+    cout << ceil(-2.4) << "\n";  // -2   ** TRICKY
+    cout << floor(-2.4) << "\n"; // -3   ** TRICKY
+    cout << sqrt(16) << "\n";    // 4
+    cout << isalpha('A') << "\n";       // 1024 = true
+    cout << isalpha('4') << "\n";       // 0
+    cout << isdigit('3') << "\n";       // 1 = true
+    cout << isdigit('A') << "\n";       // 0
+    cout << isupper('A') << "\n";       // 256 = true
+    cout << isupper('a') << "\n";       // 0
+    cout << (char)tolower('X') << "\n"; // x
+    cout << (char)toupper('x') << "\n"; // X
 
-    
-    for(int i = 50; i <= 300; i++)
-    {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
+    cout << max(5, 9) << "\n";   // 9
+    cout << pow(2, 4) << "\n";   // 16
+    cout << pow(2, 4.1) << "\n"; // 17.1484
+    cout << log2(16) << "\n";    // 4
+    cout << log10(1000) << "\n"; // 3
 
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
-    }
-
-    cout << count << endl;
-
+    cout << (double)rand() / RAND_MAX << "\n"; // 0.840188
 }

@@ -1,7 +1,7 @@
 /*
 ============================================================
- Task Title    : Find Special Pairs (Mathematical Striding)
- Module        : Section 07 – Loops
+ Task Title    : Max of 6 numbers 
+ Module        : Section 11 – Functions
  Author        : <Add author name>
  Created On    : <Add creation date>
  Draft Version : v0.1
@@ -29,6 +29,8 @@
  File Inclusions
 ============================================================*/
 #include <iostream>
+#include <climits>
+
 /*============================================================
  Used Namespaces
 ============================================================*/
@@ -60,31 +62,52 @@ using namespace std;
 /*============================================================
  Global Function Definitions
 ============================================================*/
-int main(void)
+/*============================================================
+ File Inclusions
+============================================================*/
+
+int max(int a, int b, int c)
 {
-    int count{0};
+    int result{0};
 
-    
-    for(int i = 50; i <= 300; i++)
+
+    if(a > b && a > c)
     {
-        int start_j = (i+1) > 70 ? (i+1) : 70;
-
-        /* Find the very first valid j */
-        while (start_j <= 400 && (i + start_j) % 7 != 0)
-        {
-            start_j++;
-        }
-
-
-        for(int j = start_j; j <= 400; j+= 7)
-        {
-            if(!((i+j)%7))
-            {
-                count++;
-            }
-        }
+        result = a; 
+    }
+    else if(b > a && b > c)
+    {
+        result = b;
+    }
+    else 
+    {
+        result = c; 
     }
 
-    cout << count << endl;
+    return result;
+}
+int max(int a, int b, int c, int d)
+{
+    int subMax = max(a,b,c);
 
+    return d > subMax ? d: subMax;
+}
+int max(int a, int b, int c, int d, int e)
+{
+    int subMax = max(a, b, c, d);
+
+    return e > subMax ? e : subMax;
+}
+int max(int a, int b, int c, int d, int e, int f)
+{
+    int subMax = max(a, b, c, d, e);
+
+    return f > subMax ? f : subMax;
+}
+
+int main(void)
+{
+    int a{1},b{2},c{3},d{4},e{5},f{6};
+
+    cout << max(a,b,c,d,e,f) << endl;
 }
