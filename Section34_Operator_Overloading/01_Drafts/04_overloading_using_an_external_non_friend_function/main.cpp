@@ -46,11 +46,6 @@
  *  FILE INCLUSIONS
  *********************************************************************************************************************/
 #include <iostream>
-#include <vector>
-#include <string>
-#include <cstdlib>
-#include <ctime>
-
 using namespace std;
 /**********************************************************************************************************************
  *  GLOBAL CONSTANTS & VARIABLES
@@ -75,161 +70,89 @@ using namespace std;
 /**********************************************************************************************************************
  *  MAIN FUNCTION
  *********************************************************************************************************************/
-class Shape 
+class Pair
 {
+    private:
+    double first;
+    double second; 
+
     public:
-    Shape()
-    {
-        /* Default constructor */
-    }
-    virtual ~Shape()
-    {
-    }
-    virtual double getArea(void)
-    {
-        return 0.0;
-    }
-    virtual string getShapeName(void)
-    {
-        return "Shape";
-    }
-};
-class Square: public Shape
-{
-    public:
-    double length; 
-    Square(double length): length(length) 
+    //friend Pair operator+(const Pair &first, const Pair &second);
+    Pair()
     {
 
     }
-    ~Square() override
+    Pair(double first, double second): first(first), second(second)
     {
+
     }
-    double getArea(void)
+    void setFirst(double first)
     {
-        return length * length; 
+        this->first = first;
     }
-    string getShapeName(void) override
+
+    double getFirst() const
     {
-        return "Square";
+        return first;
+    }
+
+    void setSecond(double second)
+    {
+        this->second = second;
+    }
+
+    double getSecond() const
+    {
+        return second;
     }
 };
 
-class Rectangle: public Shape
+
+Pair operator+(const Pair &first, const Pair &second)
 {
-    public:
-    double width;
-    double height;
-    Rectangle(double width, double height): width(width), height(height)
-    {
-
-    }
-    ~Rectangle() override
-    {
-    }
-    double getArea(void)
-    {
-        return width * height;
-    }
-    string getShapeName(void) override
-    {
-        return "Rectangle";
-    }
-};
-
-class Triangle: public Shape
-{
-    public:
-    double base;
-    double height;
-    Triangle(double base, double height): base(base), height(height)
-    {
-
-    }
-    ~Triangle() override
-    {
-    }
-    double getArea(void)
-    {
-        return 0.5 * base * height;
-    }
-    string getShapeName(void) override
-    {
-        return "Triangle";
-    }
-};
-
-class Circle: public Shape
-{
-    public:
-    double radius;
-    Circle(double radius): radius(radius)
-    {
-
-    }
-    ~Circle() override
-    {
-    }
-    double getArea(void)
-    {
-        return 3.141592653589793 * radius * radius;
-    }
-    string getShapeName(void) override
-    {
-        return "Circle";
-    }
-};
-
-class Parallelogram: public Shape
-{
-    public:
-    double base;
-    double height;
-    Parallelogram(double base, double height): base(base), height(height)
-    {
-
-    }
-    ~Parallelogram() override
-    {
-    }
-    double getArea(void)
-    {
-        return base * height;
-    }
-    string getShapeName(void) override
-    {
-        return "Parallelogram";
-    }
-};
-
-void printShapeInfo(Shape* shape)
-{
-    cout << "Polymorphism in action! The random shape is a " 
-         << shape->getShapeName() << " with an area of " << shape->getArea() << endl;
+    return Pair(first.getFirst() + second.getFirst(), first.getSecond() + second.getSecond());
 }
 
+Pair operator-(const Pair &first, const Pair &second)
+{
+    return Pair(first.getFirst() - second.getFirst(), first.getSecond() - second.getSecond());
+}
+
+Pair operator*(const Pair &first, const Pair &second)
+{
+    return Pair(first.getFirst() * second.getFirst(), first.getSecond() * second.getSecond());
+}
+
+Pair operator/(const Pair &first, const Pair &second)
+{
+    if (second.getFirst() == 0 || second.getSecond() == 0) {
+        cout << "Error: Division by zero!" << endl;
+        exit(1);
+    }
+    return Pair(first.getFirst() / second.getFirst(), first.getSecond() / second.getSecond());
+}
+
+bool operator==(const Pair &first, const Pair &second)
+{
+    return first.getFirst() == second.getFirst() && first.getSecond() == second.getSecond();
+}
+
+bool operator!=(const Pair &first, const Pair &second)
+{
+    return !(first == second);
+}
 int main(void)
 {
-    srand(time(NULL)); // Seed the random number generator
-    vector<Shape *> shapes; 
+    Pair x(1,2);
+    Pair y(3,4);
 
 
-    shapes.push_back(new Circle(5.0));
-    shapes.push_back(new Rectangle(3.0, 4.0));
-    shapes.push_back(new Triangle(6.0, 8.0));
+    Pair z; 
+    z = x + y ; 
 
-    for(Shape *s : shapes)
-    {
-        cout << s->getShapeName() << " Area: " << s->getArea() << endl; 
-    }
+    cout << z.getFirst() << endl; 
+    cout << z.getSecond() << endl;
 
-    cout << "\n--- Testing Polymorphism ---" << endl;
-    int randomIndex = rand() % shapes.size();
-    printShapeInfo(shapes[randomIndex]);
-    cout << "----------------------------\n" << endl;
+    
 
-    for(Shape *s : shapes)
-    {
-        delete s;
-    }
 }
